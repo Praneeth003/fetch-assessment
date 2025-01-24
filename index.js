@@ -90,6 +90,10 @@ app.get('/receipts/:id/points', (req, res) => {
     else res.send(JSON.stringify(idMap[id]))
 })
 
+app.all('*', (req, res) => { 
+    res.status(404).send("Invalid API Endpoint.")
+})
+
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
