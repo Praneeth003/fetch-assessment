@@ -1,7 +1,7 @@
 const express = require('express');
 const { calculatePoints } = require('./utils');
 const { v4: uuidv4 } = require('uuid');
-
+const { parseISO, getDate } = require('date-fns');
 
 
 const app = express();
@@ -43,7 +43,7 @@ const validateReceipt = (req, res, next) => {
 
             if (!datePattern.test(purchaseDate)) isValid = false
 
-            
+            if (parseISO(purchaseDate).toString() === 'Invalid Date') isValid = false
 
             if (!timePattern.test(purchaseTime)) isValid = false
             if (!totalPattern.test(total)) isValid = false
